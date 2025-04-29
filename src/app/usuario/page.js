@@ -1,6 +1,18 @@
-export default () => (
-    <>
-      <h1>Tcc integrador</h1>
-      <p>Projeto meu</p>
-    </>
-)
+import db from "@/lib/db"
+export default async () => {
+    const alunos = await db.query("select * from usuario")
+ return (<>
+    <h1>Lista de alunos</h1>
+    <div>
+      {
+         alunos.rows.map( 
+            a => (
+               <div>
+                  {a.nome} faz parte do projeto {a.cargo}
+               </div>
+            ) 
+         )
+      }
+   </div>
+ </>);
+}
